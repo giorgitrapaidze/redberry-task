@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Info from "../components/Info";
 import Pagination from "../components/Pagination";
 import Zero from "../components/form/Zero";
+import One from "../components/form/One";
+import Two from "../components/form/Two";
 import { redberryInfo } from "../redberryInfo";
 
 export default function Form() {
@@ -20,7 +22,9 @@ export default function Form() {
   };
 
   const goTo = (number) => {
-    setPage(number);
+    if (number < page) {
+      setPage(number);
+    }
   };
 
   return (
@@ -28,8 +32,16 @@ export default function Form() {
       <div className="main flex justify-center">
         {" "}
         <div className="left">
-          {page === 0 && <Zero />}
-          {page === 1 && <>hello</>}
+          <div className={`${page !== 0 && "hide"}`}>
+            <Zero />
+          </div>
+          <div className={`${page !== 1 && "hide"}`}>
+            <One />
+          </div>
+          <div className={`${page !== 2 && "hide"}`}>
+            <Two />
+          </div>
+
           <Pagination page={page} goBack={goBack} goTo={goTo} goNext={goNext} />
         </div>
         <Info data={redberryInfo[page]} />
