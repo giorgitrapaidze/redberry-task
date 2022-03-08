@@ -4,13 +4,24 @@ import Pagination from "../components/Pagination";
 import Zero from "../components/form/Zero";
 import One from "../components/form/One";
 import Two from "../components/form/Two";
+import useForm from "../hooks/useForm";
 import { redberryInfo } from "../redberryInfo";
 
 export default function Form() {
   const [page, setPage] = useState(0);
 
+  const {
+    handleChange,
+    handleErrors,
+    handleSkills,
+    handleNext,
+    values,
+    errors,
+    touched,
+  } = useForm();
+
   const goNext = () => {
-    if (page < 4) {
+    if (handleNext(page) && touched && page < 4) {
       setPage(page + 1);
     }
   };
@@ -33,17 +44,30 @@ export default function Form() {
         {" "}
         <div className="left">
           <div className={`${page !== 0 && "hide"}`}>
-            <Zero />
+            {page === 0 && (
+              <Zero
+                handleChange={handleChange}
+                handleErrors={handleErrors}
+                values={values}
+                errors={errors}
+              />
+            )}
           </div>
           <div className={`${page !== 1 && "hide"}`}>
-            <One />
+            {page === 1 && (
+              <One
+                values={values}
+                errors={errors}
+                handleSkills={handleSkills}
+                handleChange={handleChange}
+              />
+            )}
           </div>
           <div className={`${page !== 2 && "hide"}`}>
             <Two />
           </div>
-
-          <Pagination page={page} goBack={goBack} goTo={goTo} goNext={goNext} />
         </div>
+        <Pagination page={page} goBack={goBack} goTo={goTo} goNext={goNext} />
         <Info data={redberryInfo[page]} />
       </div>
     </div>

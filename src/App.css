@@ -71,6 +71,14 @@ input[type="date"] {
 .justify-center {
   justify-content: center;
 }
+
+.pagination {
+  position: fixed;
+  bottom: 15%;
+  left: 20%;
+  overflow: hidden;
+}
+
 .pagination div {
   display: inline-block;
   margin-right: 15px;
@@ -88,8 +96,44 @@ input[type="date"] {
 .active {
   opacity: 90%;
 }
-
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .form-inputs {
   display: flex;
   flex-direction: column;
+  width: 455px;
+}
+
+.add-language {
+  width: 201px;
+  height: 32px;
+  font-size: 12px;
+  background-color: #fe3b1f;
+  color: #ffffff;
+  align-self: flex-end;
+  border: none;
+  margin-bottom: 63px;
+}
+
+.skill {
+  box-sizing: border-box;
+  width: 455px;
+  height: 54px;
+  padding: 14px 12px 14px 17px;
+  border: 1px solid #525557;
+  vertical-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 17px;
+}
+.skill-name {
+  margin-right: 35px;
+}
+.skill-experience {
+  margin-right: 139px;
 }
