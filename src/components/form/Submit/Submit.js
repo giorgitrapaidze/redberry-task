@@ -7,7 +7,9 @@ export default function Submit(props) {
       <button className="submit-button" onClick={submit}>
         Submit
       </button>
-      <h3 onClick={goBack}>go back</h3>
+      <h3 className="submit-text" onClick={goBack}>
+        go back
+      </h3>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Pagination.css";
 
 export default function Pagination(props) {
   const { goBack, goTo, goNext, page } = props;

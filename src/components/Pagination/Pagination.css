@@ -1,0 +1,18 @@
+/* Pagination */
+
+.pagination {
+  position: fixed;
+  bottom: 10%;
+  left: 20%;
+  overflow: hidden;
+}
+
+.pagination div {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.pagination img {
+  width: 18px;
+  height: 18px;
+}

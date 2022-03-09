@@ -1,12 +1,13 @@
 import React from "react";
+import "./Zero.css";
 
 export default function Zero(props) {
   const { handleChange, handleErrors, values, errors } = props;
 
   return (
-    <div className="form">
+    <div className="form zero">
       <h2>Hey, Rocketeer, what are your coordinates?</h2>
-      <div className="form-inputs">
+      <div className="form-inputs zero-inputs">
         <input
           name="first_name"
           type="text"

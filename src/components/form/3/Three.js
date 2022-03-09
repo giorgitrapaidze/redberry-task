@@ -1,40 +1,44 @@
 import React from "react";
+import "./Three.css";
 
 export default function Three(props) {
   const { handleChange, handleErrors, values, errors } = props;
 
   return (
-    <div className="form">
+    <div className="form three">
       <h2>What about you?</h2>
-      <div onChange={handleChange}>
+      <div className="about-you" onChange={handleChange} onBlur={handleErrors}>
         <p>Would you attend Devtalks and maybe also organize your own?</p> {" "}
-        <input
-          type="radio"
-          name="will_organize_devtalk"
-          id="yes"
-          value="true"
-        />
-        <label htmlFor="yes">Yes</label> {" "}
-        <input
-          type="radio"
-          name="will_organize_devtalk"
-          id="no"
-          value="false"
-        />
-        <label htmlFor="no">No</label>
+        <div className="about-input">
+          <input
+            type="radio"
+            name="will_organize_devtalk"
+            id="yes"
+            value="true"
+          />
+          <label htmlFor="yes">Yes</label> {" "}
+        </div>
+        <div className="about-input">
+          <input
+            type="radio"
+            name="will_organize_devtalk"
+            id="no"
+            value="false"
+          />
+          <label htmlFor="no">No</label>
+        </div>
       </div>
       {errors.will_organize_devtalk && <p>{errors.will_organize_devtalk}</p>}
 
       {values.will_organize_devtalk && (
-        <div>
+        <div className="devtalk">
           <p>What would you speak about at Devtalk?</p>
           <textarea
             onChange={handleChange}
+            onBlur={handleErrors}
             name="devtalk_topic"
             value={values.devtalk_topic}
             id=""
-            cols="30"
-            rows="10"
           >
             I would...
           </textarea>
@@ -44,12 +48,12 @@ export default function Three(props) {
 
       <p>Tell us something special</p>
       <textarea
+        className="special"
         onChange={handleChange}
+        onBlur={handleErrors}
         name="something_special"
         value={values.something_special}
         id=""
-        cols="30"
-        rows="10"
       >
         I...
       </textarea>

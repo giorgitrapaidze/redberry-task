@@ -2,20 +2,16 @@ import { useCallback, useEffect, useState } from "react";
 import { validationRules } from "../validationRules";
 import { validationHandlers } from "../validationHandlers";
 const useForm = () => {
-  const pageZero = ["first_name", "last_name", "email", "phone"];
+  const pageZero = ["first_name", "last_name", "email"];
   const pageOne = ["skills"];
-  const pageTwo = [
-    "work_preference",
-    "had_covid",
-    "had_covid_at",
-    "vaccinated",
-    "vaccinated_at",
-  ];
+  const pageTwo = ["work_preference", "had_covid", "vaccinated"];
+  const pageTwoTrue = ["had_covid_at", "vaccinated_at"];
   const pageThree = [
     "will_organize_devtalk",
     "devtalk_topic",
     "something_special",
   ];
+
   const [values, setValues] = useState({
     first_name: "",
     last_name: "",
@@ -23,13 +19,13 @@ const useForm = () => {
     phone: "",
     skills: [{ id: 0, experience: 0 }],
     work_preference: "",
-    had_covid: "",
+    had_covid: false,
     had_covid_at: "",
-    vaccinated: "",
+    vaccinated: false,
     vaccinated_at: "",
     will_organize_devtalk: "",
-    devtalk_topic: "",
-    something_special: "",
+    devtalk_topic: "I would...",
+    something_special: "I..",
   });
 
   const [errors, setErrors] = useState({});
@@ -83,6 +79,7 @@ const useForm = () => {
     },
     [errors]
   );
+
   const handleSkills = (skills) => {
     setValues({
       ...values,
@@ -90,6 +87,48 @@ const useForm = () => {
     });
     setTouched(true);
     // setErrors(validate(values));
+  };
+
+  const clearTouched = () => {
+    setTouched(false);
+  };
+  const hasKeys = (value) => values[value] !== "";
+
+  const validatePages = (page) => {
+    if (page === 0) {
+      return pageZero.every(hasKeys);
+    } else if (page === 1) {
+      return pageOne.every(hasKeys);
+    } else if (page === 2) {
+      if (values.vaccinated === false) {
+        values.vaccinated_at = "";
+      }
+      if (values.had_covid === false) {
+        values.had_covid_at = "";
+      }
+      if (
+        (pageTwo.every(hasKeys) &&
+          values.had_covid === false &&
+          values.vaccinated === false) ||
+        (pageTwo.every(hasKeys) &&
+          values.had_covid === true &&
+          values.vaccinated === false &&
+          values.had_covid_at !== "") ||
+        (pageTwo.every(hasKeys) &&
+          values.had_covid === false &&
+          values.vaccinated === true &&
+          values.vaccinated_at !== "") ||
+        (pageTwo.every(hasKeys) && pageTwoTrue.every(hasKeys))
+      ) {
+        return true;
+      }
+      return false;
+    } else if (page === 3) {
+      if (values.will_organize_devtalk === false) {
+        values.devtalk_topic = "";
+      }
+      return pageThree.every(hasKeys);
+    }
   };
 
   const handleNext = (page) => {
@@ -126,8 +165,10 @@ const useForm = () => {
     handleNext,
     values,
     errors,
+    validatePages,
     setErrors,
     touched,
+    clearTouched,
   };
 };
 

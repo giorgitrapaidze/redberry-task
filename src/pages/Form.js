@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import Info from "../components/Info";
-import Pagination from "../components/Pagination";
-import Zero from "../components/form/Zero";
-import One from "../components/form/One";
-import Two from "../components/form/Two";
-import Three from "../components/form/Three";
-import Submit from "../components/form/Submit";
-import Thanks from "../components/form/Thanks";
+import Info from "../components/Info/Info";
+import Pagination from "../components/Pagination/Pagination";
+import Zero from "../components/form/0/Zero";
+import One from "../components/form/1/One";
+import Two from "../components/form/2/Two";
+import Three from "../components/form/3/Three";
+import Submit from "../components/form/Submit/Submit";
+import Thanks from "../components/form/Thanks/Thanks";
 import useForm from "../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 import { redberryInfo } from "../redberryInfo";
 import axios from "axios";
 
 export default function Form() {
-  const [page, setPage] = useState(4);
+  const [page, setPage] = useState(2);
 
   const navigate = useNavigate();
 
@@ -27,8 +27,10 @@ export default function Form() {
     handleSkills,
     handleNext,
     values,
+    validatePages,
     errors,
     touched,
+    clearTouched,
   } = useForm();
 
   const postValues = async () => {
@@ -38,25 +40,26 @@ export default function Form() {
         ...values,
         token: "d56d1d30-9503-4005-97f3-bd957ce8ec49",
       };
+      // const response = await axios.post(
+      //   `https://bootcamp-2022.devtest.ge/api/application`,
+      //   requestBody
+      // );
       console.log(requestBody);
-      setPage(page + 1);
       setTimeout(goHome, 3000);
-
-      //   const response = await axios.post(
-      //     `https://bootcamp-2022.devtest.ge/api/application`,
-      //     requestBody
-      //   );
+      setPage(page + 1);
     } catch (error) {
       console.log(error);
     }
   };
 
   const goNext = () => {
+    validatePages(page);
     if (page === 1 && values.skills.length < 1) {
       errors.skills = "Add at least 1 skill";
     } else {
-      if (handleNext(page) && touched && page < 5) {
+      if (handleNext(page) && validatePages(page) && touched && page < 5) {
         setPage(page + 1);
+        clearTouched();
       }
     }
   };
@@ -93,6 +96,7 @@ export default function Form() {
               <One
                 values={values}
                 errors={errors}
+                handleErrors={handleErrors}
                 handleSkills={handleSkills}
                 handleChange={handleChange}
               />
@@ -102,7 +106,7 @@ export default function Form() {
             <Two
               values={values}
               errors={errors}
-              handleSkills={handleSkills}
+              handleErrors={handleErrors}
               handleChange={handleChange}
             />
           </div>
@@ -110,7 +114,7 @@ export default function Form() {
             <Three
               values={values}
               errors={errors}
-              handleSkills={handleSkills}
+              handleErrors={handleErrors}
               handleChange={handleChange}
             />
           </div>
