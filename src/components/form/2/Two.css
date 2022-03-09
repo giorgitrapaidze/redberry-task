@@ -1,0 +1,63 @@
+.two {
+  align-items: flex-start;
+}
+
+.two-form {
+  margin-left: 40px;
+  position: relative;
+  left: 0;
+}
+.two h2 {
+  width: 755px;
+  height: 175px;
+  align-self: center;
+  margin-bottom: 0px !important;
+}
+.two p {
+  width: 645px;
+  height: 32px;
+  margin-bottom: 10px;
+  margin-top: 15px !important;
+  font-size: 18px;
+}
+
+.vaccinated {
+  padding-top: 25px;
+}
+
+.work {
+  display: flex;
+  flex-direction: column;
+}
+
+.work-input {
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  margin-bottom: 17px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-image: url("https://cdn1.iconfinder.com/data/icons/color-bold-style/21/06_1-512.png");
+}
+
+.date-input {
+  padding: 17px 22px 13px 57px !important;
+  color: #454545;
+  margin-bottom: 0px !important;
+}
+
+.date-input:-webkit-calendar-picker-indicator {
+  filter: saturate(10000%);
+}
+
+input[type="date"]:before {
+  color: #454545;
+  content: attr(placeholder) !important;
+  margin-left: 0.5em;
+  margin-right: 0.3em;
+}
+
+input[type="date"]:before:focus-visible {
+  color: #ffffff;
+}

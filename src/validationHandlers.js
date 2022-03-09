@@ -23,7 +23,7 @@ const validatePhone = (phone) => {
 };
 
 const validateRadio = (value) => {
-  if (value === true || value === false) {
+  if (value !== "") {
     return true;
   }
   return false;
