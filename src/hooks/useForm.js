@@ -2,25 +2,54 @@ import { useCallback, useEffect, useState } from "react";
 import { validationRules } from "../validationRules";
 import { validationHandlers } from "../validationHandlers";
 const useForm = () => {
-  const zero = ["first_name", "last_name", "email", "phone"];
-  const one = ["skills"];
+  const pageZero = ["first_name", "last_name", "email", "phone"];
+  const pageOne = ["skills"];
+  const pageTwo = [
+    "work_preference",
+    "had_covid",
+    "had_covid_at",
+    "vaccinated",
+    "vaccinated_at",
+  ];
+  const pageThree = [
+    "will_organize_devtalk",
+    "devtalk_topic",
+    "something_special",
+  ];
   const [values, setValues] = useState({
     first_name: "",
     last_name: "",
     email: "",
     phone: "",
     skills: [{ id: 0, experience: 0 }],
+    work_preference: "",
+    had_covid: "",
+    had_covid_at: "",
+    vaccinated: "",
+    vaccinated_at: "",
+    will_organize_devtalk: "",
+    devtalk_topic: "",
+    something_special: "",
   });
+
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (value && typeof value === "string") {
+      if (value === "true") value = true;
+      if (value === "false") value = false;
+    }
     setValues({
       ...values,
       [name]: value,
     });
-    if (Object.values(values).every((value) => value.length > 0)) {
+    if (
+      Object.values(values).some(
+        (value) => value.length > 0 || value === true || value === false
+      )
+    ) {
       setTouched(true);
     } else {
       setTouched(false);
@@ -47,7 +76,6 @@ const useForm = () => {
         if (!validationHandlers[rule.type](value)) {
           setErrors({ ...errors, [name]: rule.message });
         }
-        console.log(name);
         delete errors[name];
       });
 
@@ -67,16 +95,22 @@ const useForm = () => {
   const handleNext = (page) => {
     switch (page) {
       case 0:
-        if (Object.keys(errors).some((x) => zero.includes(x)) && !touched) {
+        if (Object.keys(errors).some((x) => pageZero.includes(x))) {
           return false;
         }
         return true;
       case 1:
-        if (values.skills.length < 1) {
-          setErrors({ ...errors, skills: "Add at least 1 skill" });
+        if (Object.keys(errors).some((x) => pageOne.includes(x))) {
           return false;
         }
-        if (Object.keys(errors).some((x) => one.includes(x)) && !touched) {
+        return true;
+      case 2:
+        if (Object.keys(errors).some((x) => pageTwo.includes(x))) {
+          return false;
+        }
+        return true;
+      case 3:
+        if (Object.keys(errors).some((x) => pageThree.includes(x))) {
           return false;
         }
         return true;
@@ -92,6 +126,7 @@ const useForm = () => {
     handleNext,
     values,
     errors,
+    setErrors,
     touched,
   };
 };

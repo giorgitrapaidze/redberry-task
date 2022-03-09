@@ -44,6 +44,7 @@ export default function One(props) {
       setmySkills(alreadyChosen);
       setChosenSkill({});
       setExperience("");
+      delete errors.skills;
     }
   };
 
@@ -54,7 +55,6 @@ export default function One(props) {
     let filtered = alreadyChosen.filter((skill) => {
       return skill.id !== id;
     });
-    console.log(toAddBack);
     setAllSkills([...allSkills, toAddBack]);
     setmySkills(filtered);
   };
@@ -64,6 +64,9 @@ export default function One(props) {
   };
 
   useEffect(() => {
+    if (mySkills.length < 1) {
+      errors.skills = "Add at least 1 skill";
+    }
     updateSkills();
   }, [mySkills]);
 
@@ -104,8 +107,8 @@ export default function One(props) {
           Add Programming Language
         </button>
 
-        {mySkills &&
-          mySkills.map((myskill) => {
+        {values.skills &&
+          values.skills.map((myskill) => {
             let name = skills
               .filter((skill) => {
                 return myskill.id === skill.id;

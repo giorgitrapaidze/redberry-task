@@ -22,8 +22,16 @@ const validatePhone = (phone) => {
   return false;
 };
 
+const validateRadio = (value) => {
+  if (value === true || value === false) {
+    return true;
+  }
+  return false;
+};
+
 export const validationHandlers = {
   required: validateRequired,
   email: validateEmail,
   phone: validatePhone,
+  radio: validateRadio,
 };
