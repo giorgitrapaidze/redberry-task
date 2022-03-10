@@ -13,7 +13,7 @@ import { redberryInfo } from "../redberryInfo";
 import axios from "axios";
 
 export default function Form() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   const navigate = useNavigate();
 

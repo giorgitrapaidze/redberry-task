@@ -17,7 +17,7 @@ const useForm = () => {
     last_name: "",
     email: "",
     phone: "",
-    skills: [{ id: 0, experience: 0 }],
+    skills: [{ id: "", experience: "" }],
     work_preference: "",
     had_covid: false,
     had_covid_at: "",

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 import { useState, useEffect } from "react";
 import "./One.css";
 
@@ -8,16 +9,18 @@ export default function One(props) {
   const [skills, setSkills] = useState([]);
   const [chosenSkill, setChosenSkill] = useState({});
   const [experience, setExperience] = useState("");
-  const [allSkills, setAllSkills] = useState([]);
-  const [mySkills, setmySkills] = useState([]);
-  const [skillError, setSkillError] = useState("");
+  const [allSkills, setAllSkills] = useLocalStorage("allSkills", []);
+  const [mySkills, setmySkills] = useLocalStorage("mySkills", {});
+  const [skillError, setSkillError] = useState([]);
   const getSkills = async () => {
     try {
       const response = await axios.get(
         `https://bootcamp-2022.devtest.ge/api/skills`
       );
       setSkills(response.data);
-      setAllSkills(response.data);
+      if (mySkills.length === 0) {
+        setAllSkills(response.data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -35,14 +38,19 @@ export default function One(props) {
   };
 
   const addSkill = () => {
-    if (chosenSkill.length === 0) {
-      setSkillError("Please choose a skill");
-      return skillError;
+    console.log(chosenSkill);
+    if (
+      Object.keys(chosenSkill).length === 0 &&
+      !skillError.includes("Please choose a skill")
+    ) {
+      if (experience === "") {
+        if (!skillError.includes("Please enter experience years")) {
+          setSkillError([...skillError, "Please enter experience years"]);
+        }
+      }
+      setSkillError([...skillError, "Please choose a skill"]);
     }
-    if (experience === "") {
-      setSkillError("Please enter experience years");
-      return skillError;
-    }
+
     if (chosenSkill.length > 0 && experience !== "") {
       let alreadyChosen = [...mySkills];
       alreadyChosen.push({ id: chosenSkill[0].id, experience: experience });
@@ -109,6 +117,7 @@ export default function One(props) {
           onChange={(e) => {
             handleInput(e);
           }}
+          className="experience"
           type="number"
           value={experience}
           placeholder="Experience Duration in Years"
@@ -140,8 +149,11 @@ export default function One(props) {
             );
           })}
       </div>
-      {skillError && <p>{skillError}</p>}
       {errors.skills && <p>{errors.skills}</p>}
+      {skillError &&
+        skillError.map((error) => {
+          return <p key={error}>{error}</p>;
+        })}
     </div>
   );
 }

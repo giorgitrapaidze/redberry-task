@@ -10,6 +10,10 @@
   background-position-y: 50%;
 }
 
+.experience {
+  padding-right: 150px !important;
+}
+
 .add-language {
   width: 201px;
   height: 32px;
