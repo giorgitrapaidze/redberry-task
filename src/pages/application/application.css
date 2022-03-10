@@ -93,6 +93,7 @@ h4 {
 .field input {
   height: 42px;
   border: none;
+  width: 170px;
 }
 
 .field label {
