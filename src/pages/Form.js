@@ -54,7 +54,6 @@ export default function Form() {
     validatePages(page);
     if (page === 1 && values.skills.length < 1) {
       errors.skills = "Add at least 1 skill";
-<<<<<<< HEAD
     }
 
     if (page === 3 && values.will_organize_devtalk === false) {
@@ -62,12 +61,6 @@ export default function Form() {
     }
     if (handleNext(page) && validatePages(page) && touched && page < 5) {
       setPage(page + 1);
-=======
-    } else {
-      if (handleNext(page) && validatePages(page) && touched && page < 5) {
-        setPage(page + 1);
-      }
->>>>>>> 9d8b4cfb79ff55f1b4a95b628f707f03195e4bb5
     }
   };
 
