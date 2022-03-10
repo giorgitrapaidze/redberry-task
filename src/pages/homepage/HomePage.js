@@ -32,12 +32,21 @@ export default function Homepage() {
         >
           Start Questionnaire
         </button>
-        <h3 className="submit-text" onClick={goToApps}>
-          Submitted Applications
-        </h3>
+        <div className="box">
+          <h3
+            onClick={goToApps}
+            style={{ cursor: "pointer" }}
+            className="submit-text"
+          >
+            Submitted Applications
+          </h3>
+          <img
+            className="rocketman"
+            alt="background"
+            src="images/rocketman.png"
+          />
+        </div>
       </div>
-
-      <img className="rocketman" alt="background" src="images/rocketman.png" />
     </div>
   );
 }

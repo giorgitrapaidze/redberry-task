@@ -21,7 +21,7 @@ export default function Insights(props) {
           <div className="about-input">
             <input
               type="radio"
-              checked={app.will_organize_devtalk === false && false}
+              checked={app.will_organize_devtalk === false && true}
               id="no"
               readOnly={true}
               value="false"
