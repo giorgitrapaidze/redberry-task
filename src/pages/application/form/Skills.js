@@ -15,7 +15,7 @@ export default function Skills(props) {
         return (
           <div
             key={skill.id}
-            className="skill"
+            className="skill form-skill"
             style={{
               border: "none",
               marginBottom: "0px",
