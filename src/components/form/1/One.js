@@ -10,6 +10,7 @@ export default function One(props) {
   const [experience, setExperience] = useState("");
   const [allSkills, setAllSkills] = useState([]);
   const [mySkills, setmySkills] = useState([]);
+  const [skillError, setSkillError] = useState("");
   const getSkills = async () => {
     try {
       const response = await axios.get(
@@ -34,7 +35,15 @@ export default function One(props) {
   };
 
   const addSkill = () => {
-    if (chosenSkill.length > 0) {
+    if (chosenSkill.length === 0) {
+      setSkillError("Please choose a skill");
+      return skillError;
+    }
+    if (experience === "") {
+      setSkillError("Please enter experience years");
+      return skillError;
+    }
+    if (chosenSkill.length > 0 && experience !== "") {
       let alreadyChosen = [...mySkills];
       alreadyChosen.push({ id: chosenSkill[0].id, experience: experience });
       setAllSkills(
@@ -45,6 +54,7 @@ export default function One(props) {
       setmySkills(alreadyChosen);
       setChosenSkill({});
       setExperience("");
+      setSkillError("");
       delete errors.skills;
     }
   };
@@ -130,6 +140,7 @@ export default function One(props) {
             );
           })}
       </div>
+      {skillError && <p>{skillError}</p>}
       {errors.skills && <p>{errors.skills}</p>}
     </div>
   );

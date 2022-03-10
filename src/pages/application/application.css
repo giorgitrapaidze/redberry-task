@@ -9,6 +9,9 @@
 .app-left {
   width: 50%;
 }
+.app-right {
+  width: 50%;
+}
 .header {
   width: 1152px;
   display: flex;
@@ -62,9 +65,17 @@
 
 .accordion-body {
   height: 1542px;
-  padding: 36px 161px 61px 222px;
+  padding: 36px 161px 61px 161px;
   display: flex;
   justify-content: center;
+}
+
+.accordion-body p {
+  font-size: 18px;
+}
+
+.accordion-body {
+  font-size: 12px;
 }
 h4 {
   color: #fe3b1f;
@@ -72,6 +83,7 @@ h4 {
   text-decoration: underline;
   width: 288px;
   height: 37px;
+  font-style: italic;
 }
 .field {
   display: flex;
@@ -105,4 +117,22 @@ h4 {
 
 .app-date::before {
   content: none;
+}
+
+.insights p {
+  max-width: 447px;
+}
+
+.insights textarea {
+  max-width: 447px;
+}
+
+.first-radio {
+  margin-top: 30px;
+}
+
+.personal,
+.skills {
+  height: 342px;
+  font-style: italic;
 }

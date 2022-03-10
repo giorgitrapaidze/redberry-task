@@ -13,7 +13,7 @@ import { redberryInfo } from "../redberryInfo";
 import axios from "axios";
 
 export default function Form() {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
 
   const navigate = useNavigate();
 
@@ -37,13 +37,12 @@ export default function Form() {
     try {
       const requestBody = {
         ...values,
-        token: "d56d1d30-9503-4005-97f3-bd957ce8ec49",
+        token: process.env.REACT_APP_TOKEN,
       };
-      // const response = await axios.post(
-      //   `https://bootcamp-2022.devtest.ge/api/application`,
-      //   requestBody
-      // );
-      console.log(requestBody);
+      const response = await axios.post(
+        `https://bootcamp-2022.devtest.ge/api/application`,
+        requestBody
+      );
       setTimeout(goHome, 3000);
       setPage(page + 1);
     } catch (error) {
@@ -55,10 +54,13 @@ export default function Form() {
     validatePages(page);
     if (page === 1 && values.skills.length < 1) {
       errors.skills = "Add at least 1 skill";
-    } else {
-      if (handleNext(page) && validatePages(page) && touched && page < 5) {
-        setPage(page + 1);
-      }
+    }
+
+    if (page === 3 && values.will_organize_devtalk === false) {
+      values.devtalk_topic = "I would";
+    }
+    if (handleNext(page) && validatePages(page) && touched && page < 5) {
+      setPage(page + 1);
     }
   };
 

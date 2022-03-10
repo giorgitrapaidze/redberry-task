@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { validationRules } from "../validationRules";
-import { validationHandlers } from "../validationHandlers";
+import { useCallback, useState } from "react";
+import { validationRules } from "../validation/validationRules";
+import { validationHandlers } from "../validation/validationHandlers";
 const useForm = () => {
   const pageZero = ["first_name", "last_name", "email"];
   const pageOne = ["skills"];
@@ -37,10 +37,22 @@ const useForm = () => {
       if (value === "true") value = true;
       if (value === "false") value = false;
     }
+    if (values.will_organize_devtalk === false) {
+      values.devtalk_topic = "I would";
+    }
+
+    if (values.vaccinated === false) {
+      values.vaccinated_at = new Date().toISOString().slice(0, 10);
+    }
+
+    if (values.had_covid === false) {
+      values.had_covid_at = new Date().toISOString().slice(0, 10);
+    }
     setValues({
       ...values,
       [name]: value,
     });
+
     if (
       Object.values(values).some(
         (value) => value.length > 0 || value === true || value === false
@@ -124,9 +136,6 @@ const useForm = () => {
       }
       return false;
     } else if (page === 3) {
-      if (values.will_organize_devtalk === false) {
-        values.devtalk_topic = "";
-      }
       if (
         (values.will_organize_devtalk === false &&
           values.something_special !== "") ||

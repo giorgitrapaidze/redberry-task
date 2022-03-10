@@ -1,6 +1,8 @@
 /* Info */
 .info h2 {
-  width: fit-content;
+  display: flex;
+  width: 705px;
+  justify-content: flex-start;
 }
 
 .info {
@@ -9,6 +11,7 @@
   flex-direction: column;
   background: radial-gradient(50% 50% at 50% 50%, #0c0d0e 0%, #151718 73.44%);
   align-items: center;
+  padding-left: 100px;
 }
 .info p {
   color: white;
@@ -18,4 +21,5 @@
   line-height: 48px;
   letter-spacing: 0.05em;
   text-align: left;
+  margin-top: 100px !important;
 }

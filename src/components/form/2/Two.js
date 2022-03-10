@@ -48,11 +48,25 @@ export default function Two(props) {
         >
           <p>Did you contact covid 19? :(</p>
           <div className="work-input">
-              <input type="radio" name="had_covid" id="yes" value="true" />
+             {" "}
+            <input
+              type="radio"
+              name="had_covid"
+              onChange={handleChange}
+              id="yes"
+              value="true"
+            />
             <label htmlFor="yes">Yes</label>
           </div>
           <div className="work-input">
-              <input type="radio" name="had_covid" id="no" value="false" />
+             {" "}
+            <input
+              type="radio"
+              name="had_covid"
+              onChange={handleChange}
+              id="no"
+              value="false"
+            />
             <label htmlFor="no">No</label>
           </div>
         </div>
@@ -81,11 +95,25 @@ export default function Two(props) {
         >
           <p className="vaccinated">Have you been vaccinated?</p>
           <div className="work-input">
-              <input type="radio" name="vaccinated" id="yes" value="true" />
+             {" "}
+            <input
+              type="radio"
+              onChange={handleChange}
+              name="vaccinated"
+              id="yes"
+              value="true"
+            />
             <label htmlFor="yes">Yes</label>
           </div>
           <div className="work-input">
-              <input type="radio" name="vaccinated" id="no" value="false" />
+             {" "}
+            <input
+              type="radio"
+              onChange={handleChange}
+              name="vaccinated"
+              id="no"
+              value="false"
+            />
             <label htmlFor="no">No</label>
           </div>
         </div>

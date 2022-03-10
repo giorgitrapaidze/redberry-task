@@ -88,36 +88,6 @@ input[type="date"] {
   width: 455px;
 }
 
-.add-language {
-  width: 201px;
-  height: 32px;
-  font-size: 12px;
-  background-color: #fe3b1f;
-  color: #ffffff;
-  align-self: flex-end;
-  border: none;
-  margin-bottom: 63px;
-}
-
-.skill {
-  box-sizing: border-box;
-  width: 455px;
-  height: 54px;
-  padding: 14px 12px 14px 17px;
-  border: 1px solid #525557;
-  vertical-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 17px;
-}
-.skill-name {
-  margin-right: 35px;
-}
-.skill-experience {
-  margin-right: 139px;
-}
-
 /* Submit Page */
 
 .submit-page {

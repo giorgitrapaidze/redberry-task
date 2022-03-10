@@ -21,10 +21,6 @@
   font-size: 18px;
 }
 
-.vaccinated {
-  padding-top: 25px;
-}
-
 .work {
   display: flex;
   flex-direction: column;
@@ -35,6 +31,11 @@
   flex-direction: row;
   padding-left: 10px;
   margin-bottom: 17px;
+  align-items: center;
+}
+
+.work-input input {
+  margin-right: 6px;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {

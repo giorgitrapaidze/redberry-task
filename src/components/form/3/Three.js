@@ -6,13 +6,14 @@ export default function Three(props) {
 
   return (
     <div className="form three">
-      <h2>What about you?</h2>
+      <h2 id="three-header">What about you?</h2>
       <div className="about-you" onChange={handleChange} onBlur={handleErrors}>
         <p>Would you attend Devtalks and maybe also organize your own?</p> {" "}
         <div className="about-input">
           <input
             type="radio"
             name="will_organize_devtalk"
+            onClick={handleChange}
             id="yes"
             value="true"
           />
@@ -21,6 +22,7 @@ export default function Three(props) {
         <div className="about-input">
           <input
             type="radio"
+            onClick={handleChange}
             name="will_organize_devtalk"
             id="no"
             value="false"
