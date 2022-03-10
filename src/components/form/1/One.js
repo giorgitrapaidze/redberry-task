@@ -127,8 +127,8 @@ export default function One(props) {
           Add Programming Language
         </button>
 
-        {values.skills &&
-          values.skills.map((myskill) => {
+        {mySkills &&
+          mySkills.map((myskill) => {
             let name = skills
               .filter((skill) => {
                 return myskill.id === skill.id;
