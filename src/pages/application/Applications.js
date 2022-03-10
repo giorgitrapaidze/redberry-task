@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Accordion from "react-bootstrap/Accordion";
 import "./application.css";
+<<<<<<< HEAD
 import Covid from "./form/Covid";
 import Insights from "./form/Insights";
 import Personal from "./form/Personal";
 import Skills from "./form/Skills";
+=======
+>>>>>>> 9d8b4cfb79ff55f1b4a95b628f707f03195e4bb5
 
 export default function Applications() {
   const [applications, setApplications] = useState([]);
@@ -15,8 +18,14 @@ export default function Applications() {
     try {
       const response = await axios.get(
         `https://bootcamp-2022.devtest.ge/api/applications`,
+<<<<<<< HEAD
         { params: { token: process.env.REACT_APP_TOKEN } }
       );
+=======
+        { params: { token: "d56d1d30-9503-4005-97f3-bd957ce8ec49" } }
+      );
+      console.log(response.data);
+>>>>>>> 9d8b4cfb79ff55f1b4a95b628f707f03195e4bb5
       setApplications(response.data);
     } catch (error) {
       console.log(error);
