@@ -16,7 +16,7 @@ const validateEmail = (email) => {
 
 const validatePhone = (phone) => {
   const validRegex = /[+]9955/g;
-  if (phone.match(validRegex)) {
+  if (phone.match(validRegex) && phone.length === 13) {
     return true;
   }
   return false;

@@ -107,7 +107,11 @@ const useForm = () => {
   const hasKeys = (value) => values[value] !== "";
 
   const validatePages = (page) => {
-    if (page === 0) {
+    if (
+      page === 0 &&
+      validationHandlers.phone(values.phone) &&
+      validationHandlers.email(values.email)
+    ) {
       return pageZero.every(hasKeys);
     } else if (page === 1) {
       return pageOne.every(hasKeys);
