@@ -43,8 +43,10 @@ export default function Form() {
         `https://bootcamp-2022.devtest.ge/api/application`,
         requestBody
       );
-      setTimeout(goHome, 3000);
-      setPage(page + 1);
+      if (response) {
+        setTimeout(goHome, 3000);
+        setPage(page + 1);
+      }
     } catch (error) {
       console.log(error);
     }
