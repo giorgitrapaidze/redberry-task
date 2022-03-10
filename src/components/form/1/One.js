@@ -18,7 +18,7 @@ export default function One(props) {
         `https://bootcamp-2022.devtest.ge/api/skills`
       );
       setSkills(response.data);
-      if (mySkills.length === 0) {
+      if (Object.keys(mySkills).length === 0) {
         setAllSkills(response.data);
       }
     } catch (error) {
@@ -38,21 +38,20 @@ export default function One(props) {
   };
 
   const addSkill = () => {
-    console.log(chosenSkill);
-    if (
-      Object.keys(chosenSkill).length === 0 &&
-      !skillError.includes("Please choose a skill")
-    ) {
-      if (experience === "") {
-        if (!skillError.includes("Please enter experience years")) {
-          setSkillError([...skillError, "Please enter experience years"]);
-        }
-      }
-      setSkillError([...skillError, "Please choose a skill"]);
+    if (chosenSkill.length === 0) {
+      setSkillError("Please choose a skill");
+      return skillError;
     }
-
+    if (experience === "") {
+      setSkillError("Please enter experience years");
+      return skillError;
+    }
     if (chosenSkill.length > 0 && experience !== "") {
-      let alreadyChosen = [...mySkills];
+      let alreadyChosen = [];
+      if (Object.keys(mySkills).length !== 0) {
+        alreadyChosen = [...mySkills];
+      }
+
       alreadyChosen.push({ id: chosenSkill[0].id, experience: experience });
       setAllSkills(
         allSkills.filter((skill) => {
@@ -60,6 +59,7 @@ export default function One(props) {
         })
       );
       setmySkills(alreadyChosen);
+      console.log(mySkills);
       setChosenSkill({});
       setExperience("");
       setSkillError("");
@@ -127,7 +127,7 @@ export default function One(props) {
           Add Programming Language
         </button>
 
-        {mySkills &&
+        {Object.keys(mySkills).length !== 0 &&
           mySkills.map((myskill) => {
             let name = skills
               .filter((skill) => {

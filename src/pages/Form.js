@@ -13,7 +13,7 @@ import { redberryInfo } from "../redberryInfo";
 import axios from "axios";
 
 export default function Form() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   const navigate = useNavigate();
 
@@ -46,6 +46,7 @@ export default function Form() {
       if (response) {
         setTimeout(goHome, 3000);
         setPage(page + 1);
+        localStorage.clear();
       }
     } catch (error) {
       console.log(error);
