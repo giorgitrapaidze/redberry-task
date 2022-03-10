@@ -30,7 +30,6 @@ export default function Form() {
     validatePages,
     errors,
     touched,
-    clearTouched,
   } = useForm();
 
   const postValues = async () => {
@@ -59,7 +58,6 @@ export default function Form() {
     } else {
       if (handleNext(page) && validatePages(page) && touched && page < 5) {
         setPage(page + 1);
-        clearTouched();
       }
     }
   };

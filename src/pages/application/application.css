@@ -1,0 +1,108 @@
+.applications {
+  background: radial-gradient(50% 50% at 50% 50%, #0c0d0e 0%, #151718 73.44%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-left {
+  width: 50%;
+}
+.header {
+  width: 1152px;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 94px;
+  margin-bottom: 54px;
+}
+.header h1 {
+  font-size: 56px;
+  color: white;
+}
+.accordion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.accordion-header {
+  margin-top: 0px;
+}
+
+.accordion-button {
+  color: white;
+  background-color: #fe3b1f;
+  padding: 16px 27px 16px 27px;
+  height: 52px;
+}
+
+.accordion-button:after {
+  color: white;
+}
+
+.accordion-button:not(.collapsed) {
+  color: white;
+  background-color: #fe3b1f;
+  box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+}
+.accordion-button::after {
+  color: white;
+}
+.accordion-item {
+  box-sizing: border-box;
+  width: 1152px;
+  margin-bottom: 11px;
+  background-color: white !important;
+  border: none;
+}
+.accordion-item:first-of-type .accordion-button {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.accordion-body {
+  height: 1542px;
+  padding: 36px 161px 61px 222px;
+  display: flex;
+  justify-content: center;
+}
+h4 {
+  color: #fe3b1f;
+  font-size: 18px;
+  text-decoration: underline;
+  width: 288px;
+  height: 37px;
+}
+.field {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.field input {
+  height: 42px;
+  border: none;
+}
+
+.field label {
+  border: none;
+  display: flex;
+  align-items: center;
+  width: 102px;
+  margin-right: 27px;
+  height: 42px;
+  vertical-align: middle;
+}
+
+.covid input {
+  display: flex;
+  align-self: center;
+  margin-right: 10px;
+}
+
+.app-date {
+  width: 349px !important;
+}
+
+.app-date::before {
+  content: none;
+}

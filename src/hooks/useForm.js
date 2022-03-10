@@ -127,7 +127,14 @@ const useForm = () => {
       if (values.will_organize_devtalk === false) {
         values.devtalk_topic = "";
       }
-      return pageThree.every(hasKeys);
+      if (
+        (values.will_organize_devtalk === false &&
+          values.something_special !== "") ||
+        pageThree.every(hasKeys)
+      ) {
+        return true;
+      }
+      return false;
     }
   };
 
