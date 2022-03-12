@@ -10,7 +10,7 @@ export default function One(props) {
   const [chosenSkill, setChosenSkill] = useState({});
   const [experience, setExperience] = useState("");
   const [allSkills, setAllSkills] = useLocalStorage("allSkills", []);
-  const [mySkills, setmySkills] = useLocalStorage("mySkills", {});
+  const [mySkills, setmySkills] = useLocalStorage("mySkills", []);
   const [skillError, setSkillError] = useState([]);
   const getSkills = async () => {
     try {
@@ -154,6 +154,7 @@ export default function One(props) {
                   onClick={() => removeSkill(myskill.id)}
                   src="../../Remove.png"
                   alt=""
+                  style={{ cursor: "pointer" }}
                 />
               </div>
             );
