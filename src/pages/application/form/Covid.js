@@ -77,7 +77,7 @@ export default function Covid(props) {
             className="date-input  app-date"
             name="had_covid_at"
             value={app.had_covid_at}
-            placeholder="Date:"
+            placeholder=""
             type="date"
             readOnly={true}
           />
@@ -109,14 +109,14 @@ export default function Covid(props) {
           <label htmlFor="no">No</label>
         </div>
       </div>
-      {app.vacinated && (
+      {app.vaccinated && (
         <div>
           <p>When did you get covid vaccine?</p>
           <input
             className="date-input  app-date"
             name="vaccinated_at"
             value={app.vaccinated_at}
-            placeholder="Date:"
+            placeholder=""
             type="date"
             readOnly={true}
           />

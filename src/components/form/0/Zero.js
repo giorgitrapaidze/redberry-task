@@ -16,7 +16,9 @@ export default function Zero(props) {
           onChange={handleChange}
           onBlur={handleErrors}
         />
-        {errors.first_name && <p>{errors.first_name}</p>}
+        {errors.first_name && (
+          <p className="error-message">{errors.first_name}</p>
+        )}
         <input
           name="last_name"
           type="text"
@@ -25,7 +27,9 @@ export default function Zero(props) {
           onChange={handleChange}
           onBlur={handleErrors}
         />
-        {errors.last_name && <p>{errors.last_name}</p>}
+        {errors.last_name && (
+          <p className="error-message">{errors.last_name}</p>
+        )}
         <input
           name="email"
           type="text"
@@ -34,7 +38,7 @@ export default function Zero(props) {
           onChange={handleChange}
           onBlur={handleErrors}
         />
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="error-message">{errors.email}</p>}
         <input
           name="phone"
           type="text"
@@ -43,7 +47,7 @@ export default function Zero(props) {
           onChange={handleChange}
           onBlur={handleErrors}
         />
-        {errors.phone && <p>{errors.phone}</p>}
+        {errors.phone && <p className="error-message">{errors.phone}</p>}
       </div>
     </div>
   );

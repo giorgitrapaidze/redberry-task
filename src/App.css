@@ -17,6 +17,16 @@ h2 {
   line-height: 79px;
 }
 
+.field-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.error-message {
+  color: #fe3b1f;
+  margin-top: 10px !important;
+}
+
 .hide {
   display: none;
 }

@@ -31,22 +31,35 @@ export default function One(props) {
       return skill.id === +event.target.value;
     });
     setChosenSkill(optionSkill);
+    let updatedErrors = skillError.filter(
+      (error) => error !== "Please choose a skill"
+    );
+    setSkillError(updatedErrors);
   };
 
   const handleInput = (event) => {
     setExperience(+event.target.value);
+    let updatedErrors = skillError.filter(
+      (error) => error !== "Please enter experience years"
+    );
+    setSkillError(updatedErrors);
   };
 
   const addSkill = () => {
-    if (chosenSkill.length === 0) {
-      setSkillError("Please choose a skill");
-      return skillError;
+    let addError = false;
+    if (Object.keys(chosenSkill).length < 1) {
+      if (!skillError.includes("Please choose a skill")) {
+        setSkillError([...skillError, "Please choose a skill"]);
+      }
+      addError = true;
     }
-    if (experience === "") {
-      setSkillError("Please enter experience years");
-      return skillError;
+    if (experience === "" || experience === 0) {
+      if (!skillError.includes("Please enter experience years")) {
+        setSkillError([...skillError, "Please enter experience years"]);
+      }
+      addError = true;
     }
-    if (chosenSkill.length > 0 && experience !== "") {
+    if (chosenSkill.length > 0 && experience !== "" && !addError) {
       let alreadyChosen = [];
       if (Object.keys(mySkills).length !== 0) {
         alreadyChosen = [...mySkills];
@@ -59,7 +72,7 @@ export default function One(props) {
         })
       );
       setmySkills(alreadyChosen);
-      console.log(mySkills);
+
       setChosenSkill({});
       setExperience("");
       setSkillError("");
@@ -83,9 +96,6 @@ export default function One(props) {
   };
 
   useEffect(() => {
-    if (mySkills.length < 1) {
-      errors.skills = "Add at least 1 skill";
-    }
     updateSkills();
   }, [mySkills]);
 
@@ -149,10 +159,14 @@ export default function One(props) {
             );
           })}
       </div>
-      {errors.skills && <p>{errors.skills}</p>}
+      {errors.skills && <p className="error-message">{errors.skills}</p>}
       {skillError &&
         skillError.map((error) => {
-          return <p key={error}>{error}</p>;
+          return (
+            <p className="error-message" key={error}>
+              {error}
+            </p>
+          );
         })}
     </div>
   );

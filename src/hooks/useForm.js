@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { validationRules } from "../validation/validationRules";
 import { validationHandlers } from "../validation/validationHandlers";
 const useForm = () => {
-  const pageZero = ["first_name", "last_name", "email"];
+  const pageZero = ["first_name", "last_name", "email", "phone"];
   const pageOne = ["skills"];
   const pageTwo = ["work_preference", "had_covid", "vaccinated"];
   const pageTwoTrue = ["had_covid_at", "vaccinated_at"];
@@ -19,13 +19,13 @@ const useForm = () => {
     phone: "",
     skills: [{ id: "", experience: "" }],
     work_preference: "",
-    had_covid: false,
+    had_covid: "",
     had_covid_at: "",
-    vaccinated: false,
+    vaccinated: "",
     vaccinated_at: "",
     will_organize_devtalk: "",
-    devtalk_topic: "I would...",
-    something_special: "I..",
+    devtalk_topic: "",
+    something_special: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -66,6 +66,25 @@ const useForm = () => {
     let validationRule = validationRules.filter((rule) => {
       return rule.fieldName === name;
     });
+
+    validationRule[0].rules.forEach((rule) => {
+      if (
+        !validationHandlers[rule.type](value) &&
+        name !== "phone" &&
+        name !== "email"
+      ) {
+        setErrors({ ...errors, [name]: rule.message });
+      }
+      delete errors[name];
+    });
+  };
+
+  const handleErrors = (e) => {
+    const { name, value } = e.target;
+    let validationRule = validationRules.filter((rule) => {
+      return rule.fieldName === name;
+    });
+
     validationRule[0].rules.forEach((rule) => {
       if (!validationHandlers[rule.type](value)) {
         setErrors({ ...errors, [name]: rule.message });
@@ -74,31 +93,45 @@ const useForm = () => {
     });
   };
 
-  const handleErrors = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      let validationRule = validationRules.filter((rule) => {
-        return rule.fieldName === name;
-      });
-      validationRule[0].rules.forEach((rule) => {
-        if (!validationHandlers[rule.type](value)) {
-          setErrors({ ...errors, [name]: rule.message });
-        }
-        delete errors[name];
-      });
+  const getPageRules = (page) => {
+    const rules = validationRules.filter((rule) => {
+      return rule.page === page;
+    });
+    return rules;
+  };
 
-      // setErrors(validate(values));
-    },
-    [errors]
-  );
+  const getValueByFieldName = (fieldName) => {
+    return values[fieldName];
+  };
+
+  const setFieldError = (fieldRules) => {
+    const value = getValueByFieldName(fieldRules.fieldName);
+    let fieldErrors = [];
+    fieldRules.rules.forEach((rule) => {
+      if (!validationHandlers[rule.type](value)) {
+        fieldErrors.push({ [fieldRules.fieldName]: rule.message });
+      }
+      return false;
+      // delete errors[fieldName];
+    });
+    return fieldErrors[0];
+  };
+  const handleAllErrors = (page) => {
+    const pageRules = getPageRules(page);
+    let pageErrors = {};
+    pageRules.forEach((rule) => Object.assign(pageErrors, setFieldError(rule)));
+    setErrors(pageErrors);
+    if (pageErrors.length > 0) {
+      return false;
+    }
+    return true;
+  };
 
   const handleSkills = (skills) => {
     setValues({
       ...values,
       skills: skills,
     });
-    setTouched(true);
-    // setErrors(validate(values));
   };
 
   const clearTouched = () => {
@@ -112,9 +145,12 @@ const useForm = () => {
       validationHandlers.phone(values.phone) &&
       validationHandlers.email(values.email)
     ) {
-      return pageZero.every(hasKeys);
+      return pageZero.slice(0, 3).every(hasKeys);
     } else if (page === 1) {
-      return pageOne.every(hasKeys);
+      if (values.skills.length < 1) {
+        return false;
+      }
+      return true;
     } else if (page === 2) {
       if (values.vaccinated === false) {
         values.vaccinated_at = "";
@@ -183,6 +219,7 @@ const useForm = () => {
     handleErrors,
     handleSkills,
     handleNext,
+    handleAllErrors,
     values,
     errors,
     validatePages,

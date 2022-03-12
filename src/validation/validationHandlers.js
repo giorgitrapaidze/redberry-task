@@ -5,6 +5,13 @@ const validateRequired = (value) => {
   return false;
 };
 
+const validateObjectRequired = (value) => {
+  if (Object.keys(value).length > 0) {
+    return true;
+  }
+  return false;
+};
+
 const validateEmail = (email) => {
   const validRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -34,4 +41,5 @@ export const validationHandlers = {
   email: validateEmail,
   phone: validatePhone,
   radio: validateRadio,
+  objectRequired: validateObjectRequired,
 };

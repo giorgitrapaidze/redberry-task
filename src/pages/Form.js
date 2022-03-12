@@ -26,11 +26,12 @@ export default function Form() {
     handleErrors,
     handleSkills,
     handleNext,
+    handleAllErrors,
     values,
-    validatePages,
     errors,
+    validatePages,
     touched,
-  } = useForm();
+  } = useForm(page);
 
   const postValues = async () => {
     // <== ADD
@@ -54,15 +55,16 @@ export default function Form() {
   };
 
   const goNext = () => {
+    handleAllErrors(page);
     validatePages(page);
-    if (page === 1 && values.skills.length < 1) {
-      errors.skills = "Add at least 1 skill";
-    }
 
-    if (page === 3 && values.will_organize_devtalk === false) {
-      values.devtalk_topic = "I would";
-    }
-    if (handleNext(page) && validatePages(page) && touched && page < 5) {
+    if (
+      handleNext(page) &&
+      handleAllErrors(page) &&
+      validatePages(page) &&
+      touched &&
+      page < 5
+    ) {
       setPage(page + 1);
     }
   };

@@ -39,6 +39,10 @@ export default function Two(props) {
             <label htmlFor="hybrid">Hybrid</label>
           </div>
         </div>
+        {errors.work_preference && (
+          <p className="error-message">{errors.work_preference}</p>
+        )}
+
         <div
           className="work"
           name="had_covid"
@@ -70,7 +74,9 @@ export default function Two(props) {
             <label htmlFor="no">No</label>
           </div>
         </div>
-        {errors.had_covid && <p>{errors.had_covid}</p>}
+        {errors.had_covid && (
+          <p className="error-message">{errors.had_covid}</p>
+        )}
         {values.had_covid && (
           <div>
             <p>When?</p>
@@ -84,7 +90,9 @@ export default function Two(props) {
               type="date"
               required
             />
-            {errors.had_covid_at && <p>{errors.had_covid_at}</p>}
+            {errors.had_covid_at && (
+              <p className="error-message">{errors.had_covid_at}</p>
+            )}
           </div>
         )}
         <div
@@ -117,7 +125,9 @@ export default function Two(props) {
             <label htmlFor="no">No</label>
           </div>
         </div>
-        {errors.vaccinated && <p>{errors.vaccinated}</p>}
+        {errors.vaccinated && (
+          <p className="error-message">{errors.vaccinated}</p>
+        )}
 
         {values.vaccinated && (
           <div>
@@ -132,7 +142,9 @@ export default function Two(props) {
               type="date"
               required
             />
-            {errors.vaccinated_at && <p>{errors.vaccinated_at}</p>}
+            {errors.vaccinated_at && (
+              <p className="error-message">{errors.vaccinated_at}</p>
+            )}
           </div>
         )}
       </div>

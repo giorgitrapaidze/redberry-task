@@ -30,7 +30,9 @@ export default function Three(props) {
           <label htmlFor="no">No</label>
         </div>
       </div>
-      {errors.will_organize_devtalk && <p>{errors.will_organize_devtalk}</p>}
+      {errors.will_organize_devtalk && (
+        <p className="error-message">{errors.will_organize_devtalk}</p>
+      )}
 
       {values.will_organize_devtalk && (
         <div className="devtalk">
@@ -44,7 +46,9 @@ export default function Three(props) {
           >
             I would...
           </textarea>
-          {errors.devtalk_topic && <p>{errors.devtalk_topic}</p>}
+          {errors.devtalk_topic && (
+            <p className="error-message">{errors.devtalk_topic}</p>
+          )}
         </div>
       )}
 
@@ -59,7 +63,9 @@ export default function Three(props) {
       >
         I...
       </textarea>
-      {errors.something_special && <p>{errors.something_special}</p>}
+      {errors.something_special && (
+        <p className="error-message">{errors.something_special}</p>
+      )}
     </div>
   );
 }
